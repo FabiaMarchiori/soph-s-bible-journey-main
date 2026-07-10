@@ -10,11 +10,77 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrilhasRouteImport } from './routes/trilhas'
+import { Route as QuizzesRouteImport } from './routes/quizzes'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as NovoTestamentoRouteImport } from './routes/novo-testamento'
+import { Route as MateriaisRouteImport } from './routes/materiais'
+import { Route as JornadaRouteImport } from './routes/jornada'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
+import { Route as BibliotecaRouteImport } from './routes/biblioteca'
+import { Route as AtividadesRouteImport } from './routes/atividades'
+import { Route as AntigoTestamentoRouteImport } from './routes/antigo-testamento'
+import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TrilhasRoute = TrilhasRouteImport.update({
   id: '/trilhas',
   path: '/trilhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizzesRoute = QuizzesRouteImport.update({
+  id: '/quizzes',
+  path: '/quizzes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NovoTestamentoRoute = NovoTestamentoRouteImport.update({
+  id: '/novo-testamento',
+  path: '/novo-testamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MateriaisRoute = MateriaisRouteImport.update({
+  id: '/materiais',
+  path: '/materiais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JornadaRoute = JornadaRouteImport.update({
+  id: '/jornada',
+  path: '/jornada',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliotecaRoute = BibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtividadesRoute = AtividadesRouteImport.update({
+  id: '/atividades',
+  path: '/atividades',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AntigoTestamentoRoute = AntigoTestamentoRouteImport.update({
+  id: '/antigo-testamento',
+  path: '/antigo-testamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AjudaRoute = AjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +91,111 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
+  '/antigo-testamento': typeof AntigoTestamentoRoute
+  '/atividades': typeof AtividadesRoute
+  '/biblioteca': typeof BibliotecaRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/favoritos': typeof FavoritosRoute
+  '/jornada': typeof JornadaRoute
+  '/materiais': typeof MateriaisRoute
+  '/novo-testamento': typeof NovoTestamentoRoute
+  '/perfil': typeof PerfilRoute
+  '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
+  '/antigo-testamento': typeof AntigoTestamentoRoute
+  '/atividades': typeof AtividadesRoute
+  '/biblioteca': typeof BibliotecaRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/favoritos': typeof FavoritosRoute
+  '/jornada': typeof JornadaRoute
+  '/materiais': typeof MateriaisRoute
+  '/novo-testamento': typeof NovoTestamentoRoute
+  '/perfil': typeof PerfilRoute
+  '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
+  '/antigo-testamento': typeof AntigoTestamentoRoute
+  '/atividades': typeof AtividadesRoute
+  '/biblioteca': typeof BibliotecaRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/favoritos': typeof FavoritosRoute
+  '/jornada': typeof JornadaRoute
+  '/materiais': typeof MateriaisRoute
+  '/novo-testamento': typeof NovoTestamentoRoute
+  '/perfil': typeof PerfilRoute
+  '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/trilhas'
+  fullPaths:
+    | '/'
+    | '/ajuda'
+    | '/antigo-testamento'
+    | '/atividades'
+    | '/biblioteca'
+    | '/configuracoes'
+    | '/favoritos'
+    | '/jornada'
+    | '/materiais'
+    | '/novo-testamento'
+    | '/perfil'
+    | '/quizzes'
+    | '/trilhas'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/trilhas'
-  id: '__root__' | '/' | '/trilhas'
+  to:
+    | '/'
+    | '/ajuda'
+    | '/antigo-testamento'
+    | '/atividades'
+    | '/biblioteca'
+    | '/configuracoes'
+    | '/favoritos'
+    | '/jornada'
+    | '/materiais'
+    | '/novo-testamento'
+    | '/perfil'
+    | '/quizzes'
+    | '/trilhas'
+  id:
+    | '__root__'
+    | '/'
+    | '/ajuda'
+    | '/antigo-testamento'
+    | '/atividades'
+    | '/biblioteca'
+    | '/configuracoes'
+    | '/favoritos'
+    | '/jornada'
+    | '/materiais'
+    | '/novo-testamento'
+    | '/perfil'
+    | '/quizzes'
+    | '/trilhas'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AjudaRoute: typeof AjudaRoute
+  AntigoTestamentoRoute: typeof AntigoTestamentoRoute
+  AtividadesRoute: typeof AtividadesRoute
+  BibliotecaRoute: typeof BibliotecaRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
+  FavoritosRoute: typeof FavoritosRoute
+  JornadaRoute: typeof JornadaRoute
+  MateriaisRoute: typeof MateriaisRoute
+  NovoTestamentoRoute: typeof NovoTestamentoRoute
+  PerfilRoute: typeof PerfilRoute
+  QuizzesRoute: typeof QuizzesRoute
   TrilhasRoute: typeof TrilhasRoute
 }
 
@@ -56,6 +206,83 @@ declare module '@tanstack/react-router' {
       path: '/trilhas'
       fullPath: '/trilhas'
       preLoaderRoute: typeof TrilhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quizzes': {
+      id: '/quizzes'
+      path: '/quizzes'
+      fullPath: '/quizzes'
+      preLoaderRoute: typeof QuizzesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/novo-testamento': {
+      id: '/novo-testamento'
+      path: '/novo-testamento'
+      fullPath: '/novo-testamento'
+      preLoaderRoute: typeof NovoTestamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materiais': {
+      id: '/materiais'
+      path: '/materiais'
+      fullPath: '/materiais'
+      preLoaderRoute: typeof MateriaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jornada': {
+      id: '/jornada'
+      path: '/jornada'
+      fullPath: '/jornada'
+      preLoaderRoute: typeof JornadaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biblioteca': {
+      id: '/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof BibliotecaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atividades': {
+      id: '/atividades'
+      path: '/atividades'
+      fullPath: '/atividades'
+      preLoaderRoute: typeof AtividadesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/antigo-testamento': {
+      id: '/antigo-testamento'
+      path: '/antigo-testamento'
+      fullPath: '/antigo-testamento'
+      preLoaderRoute: typeof AntigoTestamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ajuda': {
+      id: '/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AjudaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +297,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AjudaRoute: AjudaRoute,
+  AntigoTestamentoRoute: AntigoTestamentoRoute,
+  AtividadesRoute: AtividadesRoute,
+  BibliotecaRoute: BibliotecaRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
+  FavoritosRoute: FavoritosRoute,
+  JornadaRoute: JornadaRoute,
+  MateriaisRoute: MateriaisRoute,
+  NovoTestamentoRoute: NovoTestamentoRoute,
+  PerfilRoute: PerfilRoute,
+  QuizzesRoute: QuizzesRoute,
   TrilhasRoute: TrilhasRoute,
 }
 export const routeTree = rootRouteImport
