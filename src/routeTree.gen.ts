@@ -16,6 +16,7 @@ import { Route as NovoTestamentoRouteImport } from './routes/novo-testamento'
 import { Route as MateriaisRouteImport } from './routes/materiais'
 import { Route as JornadaRouteImport } from './routes/jornada'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as BibliotecaRouteImport } from './routes/biblioteca'
 import { Route as AtividadesRouteImport } from './routes/atividades'
@@ -58,6 +59,11 @@ const FavoritosRoute = FavoritosRouteImport.update({
   path: '/favoritos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
   id: '/configuracoes',
   path: '/configuracoes',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/atividades': typeof AtividadesRoute
   '/biblioteca': typeof BibliotecaRoute
   '/configuracoes': typeof ConfiguracoesRoute
+  '/design-system': typeof DesignSystemRoute
   '/favoritos': typeof FavoritosRoute
   '/jornada': typeof JornadaRoute
   '/materiais': typeof MateriaisRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/atividades': typeof AtividadesRoute
   '/biblioteca': typeof BibliotecaRoute
   '/configuracoes': typeof ConfiguracoesRoute
+  '/design-system': typeof DesignSystemRoute
   '/favoritos': typeof FavoritosRoute
   '/jornada': typeof JornadaRoute
   '/materiais': typeof MateriaisRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/atividades': typeof AtividadesRoute
   '/biblioteca': typeof BibliotecaRoute
   '/configuracoes': typeof ConfiguracoesRoute
+  '/design-system': typeof DesignSystemRoute
   '/favoritos': typeof FavoritosRoute
   '/jornada': typeof JornadaRoute
   '/materiais': typeof MateriaisRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/atividades'
     | '/biblioteca'
     | '/configuracoes'
+    | '/design-system'
     | '/favoritos'
     | '/jornada'
     | '/materiais'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/atividades'
     | '/biblioteca'
     | '/configuracoes'
+    | '/design-system'
     | '/favoritos'
     | '/jornada'
     | '/materiais'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/atividades'
     | '/biblioteca'
     | '/configuracoes'
+    | '/design-system'
     | '/favoritos'
     | '/jornada'
     | '/materiais'
@@ -190,6 +202,7 @@ export interface RootRouteChildren {
   AtividadesRoute: typeof AtividadesRoute
   BibliotecaRoute: typeof BibliotecaRoute
   ConfiguracoesRoute: typeof ConfiguracoesRoute
+  DesignSystemRoute: typeof DesignSystemRoute
   FavoritosRoute: typeof FavoritosRoute
   JornadaRoute: typeof JornadaRoute
   MateriaisRoute: typeof MateriaisRoute
@@ -250,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavoritosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/configuracoes': {
       id: '/configuracoes'
       path: '/configuracoes'
@@ -302,6 +322,7 @@ const rootRouteChildren: RootRouteChildren = {
   AtividadesRoute: AtividadesRoute,
   BibliotecaRoute: BibliotecaRoute,
   ConfiguracoesRoute: ConfiguracoesRoute,
+  DesignSystemRoute: DesignSystemRoute,
   FavoritosRoute: FavoritosRoute,
   JornadaRoute: JornadaRoute,
   MateriaisRoute: MateriaisRoute,
