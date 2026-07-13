@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Play,
   Compass,
@@ -14,6 +13,10 @@ import {
   Sparkles,
   ArrowRight,
   MessageCircle,
+  Clock,
+  BookOpen,
+  Calendar,
+  Award,
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { StoryCard } from "@/components/StoryCard";
@@ -42,15 +45,28 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+// Premium cinematic placeholder images
+const PLACEHOLDERS = {
+  hero: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80", // Cosmic light
+  soph: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80", // Friendly guide portrait
+  descubra1: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80", // Sunset ocean
+  descubra2: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80", // Majestic mountains
+  descubra3: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", // Starry night mountain
+  featured1: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80", // Ancient path
+  featured2: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=600&q=80", // Forest light
+  featured3: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80", // Morning mist
+};
+
 function HomePage() {
   return (
     <AppShell>
       <Hero />
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-16 px-4 pb-16 pt-4 md:px-8 md:pt-6">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-20 px-4 pb-20 pt-4 md:px-8 md:pt-6">
         <ContinueJourney />
+        <DescubraHoje />
         <TracksSection />
         <GenesisCarousel />
-        <FeaturedStories />
+        <FeaturedStoriesSection />
         <EvolutionSection />
       </div>
     </AppShell>
@@ -96,6 +112,11 @@ function Hero() {
     >
       <div ref={parallaxRef} className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-hero" />
+        <img
+          src={PLACEHOLDERS.hero}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-overlay"
+        />
         <div className="absolute inset-0 grid-bg" aria-hidden />
         <div
           className="absolute -left-40 top-0 h-[500px] w-[500px] rounded-full opacity-40 blur-3xl"
@@ -107,40 +128,40 @@ function Hero() {
         />
       </div>
 
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-14 md:grid-cols-[1.15fr_1fr] md:gap-16 md:px-8 md:py-20">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-16 md:grid-cols-[1.15fr_1fr] md:gap-16 md:px-8 md:py-24">
         <div className="flex flex-col justify-center">
           <div
             data-hero-anim
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-brand-primary/40 bg-brand-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-lavender"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-brand-primary/40 bg-brand-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-lavender mb-6"
           >
             <Sparkles className="h-3.5 w-3.5" /> Nova jornada
           </div>
           <h1
             data-hero-anim
-            className="mt-5 font-display text-4xl font-extrabold leading-[1.05] text-app-text text-balance md:text-6xl lg:text-[68px]"
+            className="font-display text-4xl font-extrabold leading-[1.05] text-app-text text-balance md:text-6xl lg:text-[68px] mb-8"
           >
             A Bíblia como <br className="hidden md:inline" />
             <span className="bg-gradient-to-r from-brand-lavender via-white to-brand-cyan bg-clip-text text-transparent">
               você nunca viveu.
             </span>
           </h1>
-          <p data-hero-anim className="mt-6 max-w-xl text-base leading-relaxed text-app-text-muted md:text-lg">
+          <p data-hero-anim className="max-w-xl text-base leading-relaxed text-app-text-muted md:text-lg mb-10">
             Histórias bíblicas para aprender, viver e compartilhar — em quatro trilhas visuais
             desenhadas para cada leitor.
           </p>
 
-          <div data-hero-anim className="mt-6 flex flex-wrap gap-3">
-            <button className="group inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 font-display text-sm font-semibold text-white shadow-glow transition-smooth hover:scale-[1.02] hover:shadow-hover">
+          <div data-hero-anim className="flex flex-wrap gap-4 mb-10">
+            <button className="group inline-flex items-center gap-2 rounded-full bg-gradient-brand px-7 py-3.5 font-display text-sm font-semibold text-white shadow-glow transition-all duration-200 hover:scale-[1.02] hover:shadow-hover">
               <Play className="h-4 w-4 fill-current" />
               Continuar jornada
             </button>
-            <button className="inline-flex items-center gap-2 rounded-full border border-app-border bg-app-surface-elevated/70 px-6 py-3 font-display text-sm font-semibold text-app-text backdrop-blur transition-smooth hover:border-brand-primary/50 hover:bg-app-surface-high">
+            <button className="inline-flex items-center gap-2 rounded-full border border-app-border bg-app-surface-elevated/70 px-7 py-3.5 font-display text-sm font-semibold text-app-text backdrop-blur transition-all duration-200 hover:border-brand-primary/50 hover:bg-app-surface-high">
               Explorar biblioteca
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
-          <div data-hero-anim className="mt-8 flex items-center gap-3 text-xs text-app-text-muted">
+          <div data-hero-anim className="flex items-center gap-3 text-xs text-app-text-muted">
             <div className="flex -space-x-2">
               {tracks.map((t) => (
                 <div
@@ -151,61 +172,43 @@ function Hero() {
                 />
               ))}
             </div>
-            <span>4 trilhas · 66 livros · +180 histórias</span>
+            <span className="font-medium">4 trilhas · 66 livros · +180 histórias</span>
           </div>
         </div>
 
-        {/* Right composition */}
-        <div data-hero-anim className="relative min-h-[320px] md:min-h-full">
+        {/* Recreated Soph Card (Friendly Guide) */}
+        <div data-hero-anim className="relative min-h-[360px] md:min-h-full">
           <div className="absolute inset-0 rounded-[32px] border border-app-border/70 bg-app-surface-elevated/40 backdrop-blur-xl" />
-          <div className="relative flex h-full flex-col p-6">
-            {/* Soph greeting */}
-            <div className="flex items-start gap-3 rounded-2xl border border-brand-primary/30 bg-brand-primary/10 p-4">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-gradient-brand shadow-glow">
-                <MessageCircle className="h-5 w-5 text-white" />
+          <div className="relative flex h-full flex-col md:flex-row overflow-hidden rounded-[32px]">
+            {/* Soph Image Placeholder (occupies ~50% space) */}
+            <div className="relative h-48 md:h-full md:w-1/2 overflow-hidden">
+              <img
+                src={PLACEHOLDERS.soph}
+                alt="Soph"
+                className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-app-surface-elevated/90 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-app-surface-elevated/90" />
+            </div>
+
+            {/* Soph Content */}
+            <div className="flex flex-1 flex-col justify-between p-6 md:p-8">
+              <div className="flex items-center gap-2">
+                <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-primary/20 text-brand-primary">
+                  <Sparkles className="h-4 w-4" />
+                </span>
+                <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">Guia Amigável</span>
               </div>
-              <div className="min-w-0">
-                <div className="font-display text-sm font-bold text-app-text">Oi, eu sou a Soph!</div>
-                <p className="mt-1 text-xs leading-relaxed text-app-text-muted">
-                  Vamos aprender a Bíblia de um jeito visual, divertido e profundo?
+
+              <div className="my-4">
+                <h3 className="font-display text-2xl font-extrabold text-app-text">Olá! Eu sou a Soph.</h3>
+                <p className="mt-2 text-sm leading-relaxed text-app-text-muted">
+                  Vamos descobrir juntos mais uma história incrível hoje? Estou pronta para te guiar!
                 </p>
               </div>
-            </div>
 
-            {/* Mini next-up cards */}
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              {featuredStories.slice(0, 2).map((s) => (
-                <div
-                  key={s.id}
-                  className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-app-border"
-                >
-                  <img src={s.image} alt={s.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-3">
-                    <div className="text-[10px] font-semibold uppercase tracking-widest text-brand-cyan">
-                      Em destaque
-                    </div>
-                    <div className="mt-0.5 truncate font-display text-sm font-bold text-white">{s.title}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Track legend */}
-            <div className="mt-auto grid grid-cols-2 gap-2 pt-4">
-              {tracks.map((t) => (
-                <div
-                  key={t.id}
-                  className="flex items-center gap-2 rounded-xl border border-app-border bg-app-surface px-3 py-2 text-xs"
-                >
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ background: t.accentVar }}
-                    aria-hidden
-                  />
-                  <span className="font-semibold text-app-text">{t.name}</span>
-                </div>
-              ))}
+              <button className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-brand py-3 font-display text-sm font-bold text-white shadow-glow transition-all duration-200 hover:scale-[1.02] hover:shadow-hover">
+                Começar <ArrowRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>
@@ -249,7 +252,7 @@ function ContinueJourney() {
   return (
     <section ref={ref} aria-labelledby="continuar-titulo">
       <SectionHeader id="continuar-titulo" eyebrow="Continuar" title="Retome de onde parou" />
-      <article className="relative overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-panel">
+      <article className="relative overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-panel transition-all duration-300 hover:shadow-hover">
         <div className="grid gap-0 md:grid-cols-[280px_1fr]">
           <div className="relative aspect-video md:aspect-auto">
             <img src={story.image} alt={story.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
@@ -286,6 +289,94 @@ function ContinueJourney() {
           </div>
         </div>
       </article>
+    </section>
+  );
+}
+
+/* ---------------- Descubra Hoje (New Section) ---------------- */
+function DescubraHoje() {
+  const ref = useReveal<HTMLElement>({ selector: "[data-descubra-card]", stagger: 0.1, y: 24 });
+
+  const recommended = [
+    {
+      title: "A Travessia do Mar",
+      book: "Êxodo 14",
+      time: "12 min",
+      image: PLACEHOLDERS.descubra1,
+      track: "Tradicional",
+    },
+    {
+      title: "O Chamado de Abraão",
+      book: "Gênesis 12",
+      time: "10 min",
+      image: PLACEHOLDERS.descubra2,
+      track: "Teen",
+    },
+    {
+      title: "A Aliança do Arco-Íris",
+      book: "Gênesis 9",
+      time: "8 min",
+      image: PLACEHOLDERS.descubra3,
+      track: "Infantil",
+    },
+  ];
+
+  return (
+    <section ref={ref} aria-labelledby="descubra-titulo">
+      <SectionHeader
+        id="descubra-titulo"
+        eyebrow="Recomendado"
+        title="Descubra hoje"
+        subtitle="Histórias recomendadas especialmente para você."
+      />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {recommended.map((item, idx) => (
+          <div
+            key={idx}
+            data-descubra-card
+            className="group relative flex h-[280px] flex-col overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-card transition-all duration-300 ease-smooth hover:-translate-y-1.5 hover:shadow-hover"
+            style={{
+              boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05)"
+            }}
+          >
+            {/* Book spine effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-black/30 z-10 border-r border-white/5" />
+
+            {/* Image Cover */}
+            <div className="relative h-[60%] w-full overflow-hidden">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="h-full w-full object-cover transition-transform duration-500 ease-smooth group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-app-surface-elevated via-app-surface-elevated/20 to-transparent" />
+              <span className="absolute right-3 top-3 rounded-full bg-black/50 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+                {item.track}
+              </span>
+            </div>
+
+            {/* Content */}
+            <div className="flex h-[40%] flex-col justify-between p-4 bg-app-surface-elevated/95 border-t border-app-border/40">
+              <div className="min-w-0">
+                <h3 className="truncate font-display text-base font-bold text-app-text tracking-wide transition-colors duration-200 group-hover:text-brand-primary">
+                  {item.title}
+                </h3>
+                <div className="mt-1 flex items-center gap-2 text-xs text-app-text-muted/80">
+                  <span className="font-medium">{item.book}</span>
+                  <span>·</span>
+                  <span className="flex items-center gap-1 font-semibold">
+                    <Clock className="h-3 w-3 text-brand-cyan" /> {item.time}
+                  </span>
+                </div>
+              </div>
+
+              <button className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-white/95 py-2 font-display text-xs font-bold text-app-background transition-all duration-200 hover:bg-white hover:scale-[1.02]">
+                <Play className="h-3 w-3 fill-current" /> Abrir
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -334,9 +425,37 @@ function GenesisCarousel() {
   );
 }
 
-/* ---------------- Featured ---------------- */
-function FeaturedStories() {
+/* ---------------- Featured Stories (Mini Posters) ---------------- */
+function FeaturedStoriesSection() {
   const ref = useReveal<HTMLElement>({ selector: "[data-featured]", stagger: 0.1, y: 24 });
+
+  const featuredPosters = [
+    {
+      title: "Davi e Golias",
+      book: "1 Samuel 17",
+      time: "10 min",
+      track: "Teen",
+      badge: "Épico",
+      image: PLACEHOLDERS.featured1,
+    },
+    {
+      title: "Jonas e o Grande Peixe",
+      book: "Jonas 1–4",
+      time: "9 min",
+      track: "Mangá",
+      badge: "Destaque",
+      image: PLACEHOLDERS.featured2,
+    },
+    {
+      title: "Êxodo — A Fuga",
+      book: "Êxodo 12–14",
+      time: "14 min",
+      track: "Tradicional",
+      badge: "Épico",
+      image: PLACEHOLDERS.featured3,
+    },
+  ];
+
   return (
     <section ref={ref} aria-labelledby="destaque-titulo">
       <SectionHeader
@@ -345,44 +464,56 @@ function FeaturedStories() {
         title="Histórias que marcam"
         action={{ label: "Ver biblioteca", to: "/biblioteca" }}
       />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {featuredStories.map((s) => (
-          <div key={s.id} data-featured className="w-full">
-            <StoryCardFeatured story={s} />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredPosters.map((s, idx) => (
+          <div key={idx} data-featured className="w-full">
+            <article className="group relative flex h-[320px] flex-col overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-card transition-all duration-300 ease-smooth hover:-translate-y-1.5 hover:shadow-hover">
+              {/* Mini Poster Image Background */}
+              <div className="absolute inset-0">
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  className="h-full w-full object-cover transition-transform duration-500 ease-smooth group-hover:scale-105"
+                  loading="lazy"
+                />
+                {/* Dark cinematic overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-app-background via-app-background/60 to-transparent" />
+              </div>
+
+              {/* Poster Content */}
+              <div className="relative mt-auto flex flex-col gap-3 p-6 z-10">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-black/50 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
+                    {s.track}
+                  </span>
+                  {s.badge && (
+                    <span className="rounded-full bg-brand-primary/20 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-brand-lavender backdrop-blur-md">
+                      {s.badge}
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="font-display text-xl font-extrabold text-app-text tracking-wide transition-colors duration-200 group-hover:text-brand-primary">
+                  {s.title}
+                </h3>
+
+                <div className="flex items-center gap-2 text-xs text-app-text-muted/90">
+                  <span className="font-medium">{s.book}</span>
+                  <span>·</span>
+                  <span className="flex items-center gap-1 font-semibold">
+                    <Clock className="h-3.5 w-3.5 text-brand-cyan" /> {s.time}
+                  </span>
+                </div>
+
+                <button className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white/95 py-3 font-display text-xs font-bold text-app-background transition-all duration-200 hover:bg-white hover:scale-[1.02]">
+                  Assistir agora <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </article>
           </div>
         ))}
       </div>
     </section>
-  );
-}
-
-function StoryCardFeatured({ story }: { story: (typeof featuredStories)[number] }) {
-  return (
-    <article className="group relative flex overflow-hidden rounded-2xl border border-app-border bg-app-surface-elevated shadow-card transition-smooth hover:-translate-y-1 hover:shadow-hover">
-      <div className="relative h-40 w-40 shrink-0 overflow-hidden sm:h-full sm:w-44">
-        <img src={story.image} alt={story.title} className="absolute inset-0 h-full w-full object-cover transition-smooth group-hover:scale-105" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-app-surface-elevated/60" />
-      </div>
-      <div className="flex min-w-0 flex-1 flex-col justify-center gap-2 p-5">
-        <div className="flex items-center gap-2">
-          <span className="rounded-full bg-app-surface px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-app-text-muted">
-            {story.track}
-          </span>
-          {story.badge && (
-            <span className="rounded-full bg-brand-primary/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-brand-lavender">
-              {story.badge}
-            </span>
-          )}
-        </div>
-        <h3 className="line-clamp-1 font-display text-lg font-bold text-app-text">{story.title}</h3>
-        <p className="text-xs text-app-text-muted">
-          {story.reference} · {story.duration}
-        </p>
-        <button className="mt-2 inline-flex w-fit items-center gap-2 text-sm font-semibold text-brand-primary transition-fast hover:text-brand-lavender">
-          Assistir agora <ArrowRight className="h-3.5 w-3.5" />
-        </button>
-      </div>
-    </article>
   );
 }
 
@@ -428,10 +559,10 @@ function EvolutionSection() {
     <section ref={ref} aria-labelledby="evolucao-titulo">
       <SectionHeader id="evolucao-titulo" eyebrow="Sua evolução" title="Sua jornada até aqui" />
       <div className="grid gap-4 md:grid-cols-4">
-        <Stat value={12} label="Histórias lidas" icon={BookMarked} tint="var(--brand-primary)" />
-        <Stat value={7} label="Sequência de dias" icon={Flame} tint="var(--brand-coral)" />
-        <Stat value={5} label="Meta semanal (5/7)" icon={Compass} tint="var(--brand-cyan)" />
-        <Stat value={3} label="Conquistas" icon={Trophy} tint="var(--brand-gold)" />
+        <Stat value={12} label="Você já descobriu" suffix="histórias" icon={BookOpen} tint="var(--brand-primary)" />
+        <Stat value={7} label="Você manteve" suffix="dias seguidos" icon={Flame} tint="var(--brand-coral)" />
+        <Stat value={5} label="Você completou" suffix="metas da semana" icon={Compass} tint="var(--brand-cyan)" />
+        <Stat value={3} label="Você conquistou" suffix="medalhas" icon={Award} tint="var(--brand-gold)" />
       </div>
       <div className="mt-4 rounded-3xl border border-app-border bg-app-surface-elevated p-6 shadow-panel">
         <div className="text-xs font-semibold uppercase tracking-widest text-app-text-muted">Conquistas</div>
@@ -442,7 +573,7 @@ function EvolutionSection() {
               <div
                 key={a.name}
                 data-achievement
-                className="flex items-center gap-3 rounded-2xl border border-app-border bg-app-surface px-4 py-3"
+                className="flex items-center gap-3 rounded-2xl border border-app-border bg-app-surface px-4 py-3 transition-all duration-200 hover:border-brand-primary/40 hover:bg-app-surface-elevated"
               >
                 <div
                   className="grid h-10 w-10 place-items-center rounded-xl"
@@ -463,16 +594,18 @@ function EvolutionSection() {
 function Stat({
   value,
   label,
+  suffix,
   icon: Icon,
   tint,
 }: {
   value: number;
   label: string;
+  suffix: string;
   icon: React.ComponentType<{ className?: string }>;
   tint: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-app-border bg-app-surface-elevated p-5 shadow-card">
+    <div className="relative overflow-hidden rounded-2xl border border-app-border bg-app-surface-elevated p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-hover">
       <div
         className="absolute -right-6 -top-6 h-24 w-24 rounded-full opacity-25 blur-2xl"
         style={{ background: tint }}
@@ -489,7 +622,10 @@ function Stat({
           0
         </div>
       </div>
-      <div className="mt-3 text-xs text-app-text-muted">{label}</div>
+      <div className="mt-3 text-xs text-app-text-muted">
+        <span className="block text-app-text-muted/60 font-medium">{label}</span>
+        <span className="block font-bold text-app-text mt-0.5">{suffix}</span>
+      </div>
     </div>
   );
 }
@@ -499,27 +635,34 @@ function SectionHeader({
   id,
   eyebrow,
   title,
+  subtitle,
   action,
 }: {
   id?: string;
   eyebrow: string;
   title: string;
+  subtitle?: string;
   action?: { label: string; to: string };
 }) {
   return (
-    <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
       <div>
-        <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-lavender">
+        <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-lavender">
           {eyebrow}
         </div>
-        <h2 id={id} className="mt-1 font-display text-2xl font-bold text-app-text md:text-3xl">
+        <h2 id={id} className="mt-1 font-display text-2xl font-bold text-app-text md:text-3xl tracking-wide">
           {title}
         </h2>
+        {subtitle && (
+          <p className="mt-1.5 text-sm text-app-text-muted/80 font-medium">
+            {subtitle}
+          </p>
+        )}
       </div>
       {action && (
         <a
           href={action.to}
-          className="inline-flex items-center gap-1 text-sm font-semibold text-app-text-muted transition-fast hover:text-app-text"
+          className="inline-flex items-center gap-1 text-sm font-semibold text-app-text-muted transition-all duration-150 hover:text-app-text hover:translate-x-0.5"
         >
           {action.label}
           <ChevronRight className="h-4 w-4" />

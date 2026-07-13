@@ -29,8 +29,8 @@ export function TrackCard({ track, selected, onSelect, as = "button" }: TrackCar
       }
       aria-pressed={as === "button" ? !!selected : undefined}
       className={cn(
-        "group relative flex h-full min-h-[280px] w-full flex-col overflow-hidden rounded-3xl border text-left transition-smooth",
-        "border-app-border bg-app-surface-elevated shadow-card hover:-translate-y-1 hover:shadow-hover",
+        "group relative flex h-[380px] w-full flex-col overflow-hidden rounded-3xl border text-left transition-all duration-300 ease-smooth",
+        "border-app-border bg-app-surface-elevated shadow-card hover:-translate-y-1.5 hover:shadow-hover",
         selected && "border-brand-primary/60 shadow-hover ring-1 ring-brand-primary/50",
       )}
       style={
@@ -39,36 +39,49 @@ export function TrackCard({ track, selected, onSelect, as = "button" }: TrackCar
           : undefined
       }
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
+      {/* Image occupies ~70% of the card height */}
+      <div className="relative h-[70%] w-full overflow-hidden">
         <img
           src={track.image}
           alt={`Capa da trilha ${track.name}`}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover transition-smooth group-hover:scale-[1.05]"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-smooth group-hover:scale-[1.06]"
         />
         <div
-          className={cn("absolute inset-0 mix-blend-multiply opacity-70", track.gradientClass)}
+          className={cn("absolute inset-0 mix-blend-multiply opacity-60 transition-opacity duration-300 group-hover:opacity-50", track.gradientClass)}
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-app-surface-elevated via-app-surface-elevated/30 to-transparent" />
+        {/* Premium gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-app-surface-elevated via-app-surface-elevated/20 to-transparent" />
+        
+        {/* Floating Icon Badge */}
         <div
-          className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-2xl text-white shadow-glow"
+          className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-2xl text-white shadow-glow transition-transform duration-300 group-hover:scale-110"
           style={{ background: `linear-gradient(135deg, ${track.accentVar}, hsl(252 100% 67%))` }}
         >
           <Icon className="h-5 w-5" />
         </div>
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-5">
+
+      {/* Dark band bottom part (~30% height) */}
+      <div className="flex h-[30%] flex-col justify-between bg-app-surface-elevated/95 p-5 border-t border-app-border/40">
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-app-text-muted">
+          <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-app-text-muted/60">
             Trilha
           </div>
-          <h3 className="mt-1 font-display text-xl font-bold text-app-text">{track.name}</h3>
+          <h3 className="mt-0.5 font-display text-lg font-bold text-app-text tracking-wide transition-colors duration-200 group-hover:text-brand-primary">
+            {track.name}
+          </h3>
+          <p className="mt-1 line-clamp-1 text-xs text-app-text-muted/90">
+            {track.tagline}
+          </p>
         </div>
-        <p className="text-sm leading-relaxed text-app-text-muted">{track.tagline}</p>
-        <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-app-text">
+        <div className="flex items-center gap-2 text-xs font-bold text-app-text/90 transition-colors duration-200 group-hover:text-app-text">
           Conhecer trilha
-          <ArrowRight className="h-4 w-4 transition-smooth group-hover:translate-x-1" style={{ color: track.accentVar }} />
+          <ArrowRight 
+            className="h-3.5 w-3.5 transition-transform duration-300 ease-smooth group-hover:translate-x-1.5" 
+            style={{ color: track.accentVar }} 
+          />
         </div>
       </div>
     </Comp>
