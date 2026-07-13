@@ -201,6 +201,41 @@
 @utility glow-primary {
   box-shadow: 0 0 0 1px hsl(252 100% 67% / 0.4), 0 0 40px hsl(252 100% 67% / 0.35);
 }
+@utility bds-press {
+  transition: transform 120ms var(--ease-smooth);
+  &:active { transform: scale(0.97); }
+}
+@utility bds-breathe { animation: bds-breathe 6s ease-in-out infinite; }
+@utility bds-floating { animation: bds-floating 5s ease-in-out infinite; }
+@utility bds-glow-pulse { animation: bds-glow-pulse 3s ease-in-out infinite; }
+@utility bds-book-open { animation: bds-book-open 420ms var(--ease-smooth) both; }
+@utility bds-shimmer {
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.06), transparent);
+  background-size: 200% 100%;
+  animation: bds-shimmer 1.6s linear infinite;
+}
+
+@keyframes bds-breathe {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.015); filter: brightness(1.06); }
+}
+@keyframes bds-floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes bds-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(252 100% 67% / 0); }
+  50% { box-shadow: 0 0 32px 4px hsl(252 100% 67% / 0.35); }
+}
+@keyframes bds-book-open {
+  0% { transform: perspective(1200px) rotateY(-6deg) scale(0.98); opacity: 0.6; }
+  60% { transform: perspective(1200px) rotateY(2deg) scale(1.02); opacity: 1; }
+  100% { transform: perspective(1200px) rotateY(0) scale(1); opacity: 1; }
+}
+@keyframes bds-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
