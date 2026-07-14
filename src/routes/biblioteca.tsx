@@ -131,11 +131,8 @@ function BibliotecaIndex() {
             <EmptyState
               title="Nada encontrado por aqui"
               description="Tente outro termo, mude os filtros ou limpe a busca para ver toda a estante."
-              action={
-                <BdsButton variant="secondary" onClick={() => { setQuery(""); setFilter("all"); }}>
-                  Limpar busca
-                </BdsButton>
-              }
+              actionLabel="Limpar busca"
+              onAction={() => { setQuery(""); setFilter("all"); }}
             />
           </div>
         ) : (

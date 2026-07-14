@@ -53,7 +53,7 @@ function BookDetail() {
       <div className="mx-auto w-full max-w-[1280px] px-4 py-8 md:px-8 md:py-12">
         <BibleBreadcrumb
           items={[
-            { label: "Biblioteca", to: "/biblioteca" },
+            { label: "Biblioteca", href: "/biblioteca" },
             { label: category?.title ?? testamentLabel },
             { label: book.name },
           ]}
