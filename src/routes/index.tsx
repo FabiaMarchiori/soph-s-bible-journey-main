@@ -61,7 +61,7 @@ function HomePage() {
   return (
     <AppShell>
       <Hero />
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-20 px-4 pb-20 pt-4 md:px-8 md:pt-6">
+      <div className="mx-auto flex max-w-[1240px] flex-col gap-24 px-4 pb-24 pt-6 md:gap-28 md:px-10 md:pt-10">
         <ContinueJourney />
         <DescubraHoje />
         <TracksSection />
@@ -115,42 +115,44 @@ function Hero() {
         <img
           src={PLACEHOLDERS.hero}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-overlay"
+          className="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-overlay"
         />
         <div className="absolute inset-0 grid-bg" aria-hidden />
         <div
-          className="absolute -left-40 top-0 h-[500px] w-[500px] rounded-full opacity-40 blur-3xl"
+          className="absolute -left-40 top-0 h-[460px] w-[460px] rounded-full opacity-40 blur-3xl"
           style={{ background: "radial-gradient(closest-side, hsl(252 100% 67% / 0.6), transparent)" }}
         />
         <div
-          className="absolute -right-32 top-20 h-[400px] w-[400px] rounded-full opacity-30 blur-3xl"
+          className="absolute -right-32 top-20 h-[380px] w-[380px] rounded-full opacity-25 blur-3xl"
           style={{ background: "radial-gradient(closest-side, hsl(186 79% 58% / 0.6), transparent)" }}
         />
+        {/* Bottom vignette for cinematic depth */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-app-background to-transparent" />
       </div>
 
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-16 md:grid-cols-[1.15fr_1fr] md:gap-16 md:px-8 md:py-24">
+      <div className="mx-auto grid max-w-[1240px] items-center gap-12 px-4 py-14 md:grid-cols-[1.75fr_1fr] md:gap-16 md:px-10 md:py-20 lg:py-24">
         <div className="flex flex-col justify-center">
           <div
             data-hero-anim
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-brand-primary/40 bg-brand-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-lavender mb-6"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-brand-primary/40 bg-brand-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-lavender mb-8"
           >
             <Sparkles className="h-3.5 w-3.5" /> Nova jornada
           </div>
           <h1
             data-hero-anim
-            className="font-display text-4xl font-extrabold leading-[1.05] text-app-text text-balance md:text-6xl lg:text-[68px] mb-8"
+            className="font-display text-4xl font-extrabold leading-[1.03] text-app-text text-balance md:text-[56px] lg:text-[64px] mb-10"
           >
             A Bíblia como <br className="hidden md:inline" />
             <span className="bg-gradient-to-r from-brand-lavender via-white to-brand-cyan bg-clip-text text-transparent">
               você nunca viveu.
             </span>
           </h1>
-          <p data-hero-anim className="max-w-xl text-base leading-relaxed text-app-text-muted md:text-lg mb-10">
+          <p data-hero-anim className="max-w-xl text-base leading-relaxed text-app-text-muted md:text-lg mb-12">
             Histórias bíblicas para aprender, viver e compartilhar — em quatro trilhas visuais
             desenhadas para cada leitor.
           </p>
 
-          <div data-hero-anim className="flex flex-wrap gap-4 mb-10">
+          <div data-hero-anim className="flex flex-wrap gap-4 mb-12">
             <button className="group inline-flex items-center gap-2 rounded-full bg-gradient-brand px-7 py-3.5 font-display text-sm font-semibold text-white shadow-glow transition-all duration-200 hover:scale-[1.02] hover:shadow-hover">
               <Play className="h-4 w-4 fill-current" />
               Continuar jornada
@@ -176,40 +178,47 @@ function Hero() {
           </div>
         </div>
 
-        {/* Recreated Soph Card (Friendly Guide) */}
-        <div data-hero-anim className="relative min-h-[360px] md:min-h-full">
-          <div className="absolute inset-0 rounded-[32px] border border-app-border/70 bg-app-surface-elevated/40 backdrop-blur-xl" />
-          <div className="relative flex h-full flex-col md:flex-row overflow-hidden rounded-[32px]">
-            {/* Soph Image Placeholder (occupies ~50% space) */}
-            <div className="relative h-48 md:h-full md:w-1/2 overflow-hidden">
+        {/* Soph — character welcome (narrow, portrait). Placeholder for the future
+            official Soph illustration; no card chrome around it. */}
+        <div data-hero-anim className="relative mx-auto w-full max-w-[280px] md:mx-0 md:ml-auto">
+          {/* Soft ground glow behind the character */}
+          <div
+            aria-hidden
+            className="absolute -bottom-6 left-1/2 h-16 w-[70%] -translate-x-1/2 rounded-[100%] bg-brand-primary/40 blur-2xl"
+          />
+          {/* Character frame — reserved space for the official Soph illustration */}
+          <div className="relative aspect-[3/4] w-full">
+            {/* Ambient halo */}
+            <div
+              aria-hidden
+              className="absolute -inset-4 rounded-[36px] bg-gradient-to-b from-brand-primary/25 via-brand-primary/5 to-transparent blur-2xl"
+            />
+            <div
+              className="cinematic-frame bds-floating relative h-full w-full overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-app-surface-elevated/60 to-app-surface/40 shadow-elevated backdrop-blur-md"
+              data-soph-placeholder
+              aria-label="Soph, sua guia — ilustração oficial em breve"
+              role="img"
+            >
               <img
                 src={PLACEHOLDERS.soph}
-                alt="Soph"
-                className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                alt=""
+                className="h-full w-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-app-surface-elevated/90 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-app-surface-elevated/90" />
-            </div>
-
-            {/* Soph Content */}
-            <div className="flex flex-1 flex-col justify-between p-6 md:p-8">
-              <div className="flex items-center gap-2">
-                <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-primary/20 text-brand-primary">
-                  <Sparkles className="h-4 w-4" />
-                </span>
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">Guia Amigável</span>
+              {/* "Placeholder" ribbon so future illustration slot is explicit */}
+              <div className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/85 backdrop-blur">
+                <Sparkles className="h-3 w-3 text-brand-cyan" /> Soph
               </div>
-
-              <div className="my-4">
-                <h3 className="font-display text-2xl font-extrabold text-app-text">Olá! Eu sou a Soph.</h3>
-                <p className="mt-2 text-sm leading-relaxed text-app-text-muted">
-                  Vamos descobrir juntos mais uma história incrível hoje? Estou pronta para te guiar!
-                </p>
-              </div>
-
-              <button className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-brand py-3 font-display text-sm font-bold text-white shadow-glow transition-all duration-200 hover:scale-[1.02] hover:shadow-hover">
-                Começar <ArrowRight className="h-4 w-4" />
-              </button>
             </div>
+          </div>
+
+          {/* Welcome caption sits beneath the character, not as a marketing card */}
+          <div className="relative mt-6 text-center md:text-left">
+            <div className="font-display text-sm font-semibold text-app-text">
+              Olá! Eu sou a Soph.
+            </div>
+            <p className="mt-1 text-xs leading-relaxed text-app-text-muted">
+              Sua guia para descobrir cada história.
+            </p>
           </div>
         </div>
       </div>
@@ -254,7 +263,7 @@ function ContinueJourney() {
       <SectionHeader id="continuar-titulo" eyebrow="Continuar" title="Retome de onde parou" />
       <article className="relative overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-panel transition-all duration-300 hover:shadow-hover">
         <div className="grid gap-0 md:grid-cols-[280px_1fr]">
-          <div className="relative aspect-video md:aspect-auto">
+          <div className="cinematic-frame relative aspect-video overflow-hidden md:aspect-auto">
             <img src={story.image} alt={story.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-r from-app-surface-elevated via-transparent to-transparent md:from-transparent md:via-transparent md:to-app-surface-elevated" />
           </div>
@@ -343,7 +352,7 @@ function DescubraHoje() {
             <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-black/30 z-10 border-r border-white/5" />
 
             {/* Image Cover */}
-            <div className="relative h-[60%] w-full overflow-hidden">
+            <div className="cinematic-frame relative h-[60%] w-full overflow-hidden">
               <img
                 src={item.image}
                 alt={item.title}
@@ -469,7 +478,7 @@ function FeaturedStoriesSection() {
           <div key={idx} data-featured className="w-full">
             <article className="group relative flex h-[320px] flex-col overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-card transition-all duration-300 ease-smooth hover:-translate-y-1.5 hover:shadow-hover">
               {/* Mini Poster Image Background */}
-              <div className="absolute inset-0">
+              <div className="cinematic-frame absolute inset-0 overflow-hidden">
                 <img
                   src={s.image}
                   alt={s.title}
