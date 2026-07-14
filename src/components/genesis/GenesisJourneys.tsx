@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ChevronRight, Star, Award, Clock, CheckCircle2 } from "lucide-react";
 import { Section } from "@/components/bds";
 import { cn } from "@/lib/utils";
@@ -29,12 +30,12 @@ export function GenesisJourneys({ journeys }: GenesisJourneysProps) {
         {journeys.map((j) => {
           // Highlight Jornada 2 as the current active journey
           const isCurrent = j.id === "j2";
+          const isJ1 = j.id === "j1";
           
-          return (
+          const cardContent = (
             <article
-              key={j.id}
               className={cn(
-                "group relative flex h-[420px] w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border transition-all duration-300 ease-smooth md:w-auto",
+                "group relative flex h-[420px] w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border transition-all duration-300 ease-smooth md:w-auto text-left",
                 isCurrent 
                   ? "border-brand-primary/60 bg-app-surface-elevated shadow-glow ring-1 ring-brand-primary/30" 
                   : "border-app-border bg-app-surface-elevated/80 shadow-card hover:-translate-y-1 hover:shadow-hover"
@@ -110,16 +111,26 @@ export function GenesisJourneys({ journeys }: GenesisJourneysProps) {
                   <span className="text-[10px] font-bold text-app-text-muted/60 uppercase tracking-wider">
                     {j.stories}
                   </span>
-                  <button className={cn(
+                  <span className={cn(
                     "inline-flex items-center gap-1 text-xs font-bold transition-colors duration-200",
                     isCurrent ? "text-brand-primary group-hover:text-brand-primary-strong" : "text-app-text group-hover:text-brand-primary"
                   )}>
                     Explorar <ChevronRight className="h-3.5 w-3.5" style={{ color: j.accent }} />
-                  </button>
+                  </span>
                 </div>
               </div>
             </article>
           );
+
+          if (isJ1) {
+            return (
+              <Link key={j.id} to="/biblioteca/genesis/jornada-1" className="snap-start">
+                {cardContent}
+              </Link>
+            );
+          }
+
+          return <div key={j.id} className="snap-start">{cardContent}</div>;
         })}
       </div>
     </Section>
