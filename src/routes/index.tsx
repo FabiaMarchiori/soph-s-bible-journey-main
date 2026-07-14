@@ -61,7 +61,7 @@ function HomePage() {
   return (
     <AppShell>
       <Hero />
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-20 px-4 pb-20 pt-4 md:px-8 md:pt-6">
+      <div className="mx-auto flex max-w-[1240px] flex-col gap-24 px-4 pb-24 pt-6 md:gap-28 md:px-10 md:pt-10">
         <ContinueJourney />
         <DescubraHoje />
         <TracksSection />
