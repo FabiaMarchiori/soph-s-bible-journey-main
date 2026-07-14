@@ -1,4 +1,5 @@
 import { Play, Heart, Share2, Sparkles, BookOpen, Compass, Clock } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { BdsButton } from "@/components/bds";
 import { cn } from "@/lib/utils";
 
@@ -83,8 +84,10 @@ export function GenesisHero({
 
             {/* Actions */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <BdsButton size="lg" leadingIcon={<Play className="h-5 w-5 fill-current" />}>
-                Começar Jornada
+              <BdsButton size="lg" leadingIcon={<Play className="h-5 w-5 fill-current" />} asChild>
+                <Link to="/biblioteca/genesis/jornada-1">
+                  Começar Jornada
+                </Link>
               </BdsButton>
               <BdsButton
                 variant="secondary"
