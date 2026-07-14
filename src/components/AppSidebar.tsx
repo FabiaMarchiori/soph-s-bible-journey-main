@@ -1,4 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
+
 import {
   Home,
   Library,
@@ -84,6 +86,23 @@ interface SidebarProps {
 
 export function AppSidebar({ collapsed, onToggle, onNavigate }: SidebarProps) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    let t: number | undefined;
+    const onScroll = () => {
+      el.classList.add("is-scrolling");
+      if (t) window.clearTimeout(t);
+      t = window.setTimeout(() => el.classList.remove("is-scrolling"), 700);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      if (t) window.clearTimeout(t);
+    };
+  }, []);
 
   return (
     <TooltipProvider delayDuration={100}>
@@ -118,7 +137,7 @@ export function AppSidebar({ collapsed, onToggle, onNavigate }: SidebarProps) {
         </div>
 
         {/* Nav */}
-        <nav className="no-scrollbar flex-1 overflow-y-auto px-3 py-4">
+        <nav ref={navRef} className="soph-scroll flex-1 overflow-y-auto px-3 py-4">
           {groups.map((group) => {
             const visibleItems = group.items.filter((i) => !i.hidden);
             if (visibleItems.length === 0) return null;
