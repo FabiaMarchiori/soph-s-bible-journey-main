@@ -86,6 +86,23 @@ interface SidebarProps {
 
 export function AppSidebar({ collapsed, onToggle, onNavigate }: SidebarProps) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    let t: number | undefined;
+    const onScroll = () => {
+      el.classList.add("is-scrolling");
+      if (t) window.clearTimeout(t);
+      t = window.setTimeout(() => el.classList.remove("is-scrolling"), 700);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      if (t) window.clearTimeout(t);
+    };
+  }, []);
 
   return (
     <TooltipProvider delayDuration={100}>
