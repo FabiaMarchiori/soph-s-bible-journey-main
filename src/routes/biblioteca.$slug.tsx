@@ -55,10 +55,10 @@ export const Route = createFileRoute("/biblioteca/$slug")({
 const PLACEHOLDERS = {
   cover: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
   universe: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
-  journey1: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-  journey2: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
-  journey3: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=600&q=80",
-  journey4: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=600&q=80",
+  journey1: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", // Cosmic creation/universe
+  journey2: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", // Starry night mountains/tents
+  journey3: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=600&q=80", // Desert/Egypt pyramids
+  journey4: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=600&q=80", // Path of light/continuity
   nextBook: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=600&q=80",
 };
 
@@ -71,6 +71,10 @@ const JOURNEYS = [
     time: "36 min",
     image: PLACEHOLDERS.journey1,
     accent: "var(--brand-primary)",
+    progress: 100,
+    completedStories: "5/5 histórias",
+    starsCount: 15,
+    medalsCount: 1,
   },
   {
     id: "j2",
@@ -80,6 +84,10 @@ const JOURNEYS = [
     time: "45 min",
     image: PLACEHOLDERS.journey2,
     accent: "var(--brand-gold)",
+    progress: 42,
+    completedStories: "2/6 histórias",
+    starsCount: 6,
+    medalsCount: 0,
   },
   {
     id: "j3",
@@ -89,6 +97,10 @@ const JOURNEYS = [
     time: "30 min",
     image: PLACEHOLDERS.journey3,
     accent: "var(--brand-cyan)",
+    progress: 0,
+    completedStories: "0/4 histórias",
+    starsCount: 0,
+    medalsCount: 0,
   },
   {
     id: "j4",
@@ -98,6 +110,10 @@ const JOURNEYS = [
     time: "22 min",
     image: PLACEHOLDERS.journey4,
     accent: "var(--brand-coral)",
+    progress: 0,
+    completedStories: "0/3 histórias",
+    starsCount: 0,
+    medalsCount: 0,
   },
 ];
 

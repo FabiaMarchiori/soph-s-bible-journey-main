@@ -31,17 +31,26 @@ export function GenesisHero({
 
         <div className="grid gap-8 md:grid-cols-[300px_1fr] lg:gap-12">
           {/* Book Cover with 3D Spine Effect */}
-          <div className="relative mx-auto w-[220px] shrink-0 md:w-[280px]">
+          <div className="relative mx-auto w-[220px] shrink-0 md:w-[280px] [perspective:1000px]">
             <div
-              className="group relative aspect-[2/3] overflow-hidden rounded-2xl border border-white/10 shadow-elevated transition-transform duration-500 hover:scale-[1.02]"
+              className="group relative aspect-[2/3] overflow-hidden rounded-2xl border border-white/10 shadow-elevated transition-all duration-300 ease-smooth hover:scale-[1.03] hover:[transform:rotateY(-10deg)_rotateX(4deg)] [transform-style:preserve-3d]"
               style={{
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
               }}
             >
-              <div className="absolute left-0 top-0 bottom-0 w-[6px] bg-black/40 z-10 border-r border-white/5" />
+              {/* Book spine effect on the left */}
+              <div className="absolute left-0 top-0 bottom-0 w-[14px] bg-gradient-to-r from-black/70 via-black/20 to-transparent z-20 border-r border-white/5" />
+              
+              {/* Subtle page edge effect on the right */}
+              <div className="absolute right-0 top-0 bottom-0 w-[3px] bg-white/10 z-10" />
+              
+              {/* Hardcover texture/shine overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-10" />
+              
               <img src={coverImage} alt="Capa de Gênesis" className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+              
+              <div className="absolute bottom-6 left-6 right-6 z-10">
                 <span className="rounded bg-brand-gold/20 px-2 py-0.5 font-display text-[10px] font-bold uppercase tracking-widest text-brand-gold backdrop-blur-sm">
                   Gn
                 </span>

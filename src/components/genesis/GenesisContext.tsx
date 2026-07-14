@@ -1,7 +1,50 @@
-import { CheckCircle2, Map, BookMarked } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, Map, BookMarked, User, BookOpen } from "lucide-react";
 import { Section, GlassCard, UniversalCard, BdsButton } from "@/components/bds";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+
+interface Character {
+  name: string;
+  role: string;
+  image: string;
+  bio: string;
+  chapters: string;
+}
+
+const CHARACTERS: Character[] = [
+  {
+    name: "Adão e Eva",
+    role: "Primeiros humanos",
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80",
+    bio: "Criados à imagem e semelhança de Deus, colocados no Jardim do Éden para cuidar da criação. Sua história aborda a inocência, a escolha e as consequências da desobediência.",
+    chapters: "Gênesis 1 a 3",
+  },
+  {
+    name: "Noé",
+    role: "O construtor da arca",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80",
+    bio: "Um homem justo e íntegro em sua geração. Obedeceu fielmente a Deus ao construir uma grande arca para preservar a vida terrestre durante o Dilúvio, tornando-se o herdeiro de uma nova aliança.",
+    chapters: "Gênesis 6 a 9",
+  },
+  {
+    name: "Abraão",
+    role: "Pai da fé",
+    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80",
+    bio: "Chamado por Deus para deixar sua terra natal rumo a uma herança desconhecida. Sua fé inabalável e obediência estabeleceram a aliança eterna e a promessa de uma descendência tão numerosa quanto as estrelas.",
+    chapters: "Gênesis 12 a 25",
+  },
+  {
+    name: "José",
+    role: "Governador do Egito",
+    image: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=400&q=80",
+    bio: "O filho preferido de Jacó, vendido como escravo por seus irmãos. Através de sua integridade, sabedoria e dom de interpretar sonhos, ascendeu ao posto mais alto do Egito, salvando nações da fome.",
+    chapters: "Gênesis 37 a 50",
+  },
+];
 
 export function GenesisContext() {
+  const [selectedChar, setSelectedChar] = useState<Character | null>(null);
+
   return (
     <Section kicker="Contexto Visual" title="Antes de Começar" subtitle="Prepare-se para a leitura compreendendo o cenário geral.">
       <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
@@ -17,16 +60,27 @@ export function GenesisContext() {
           <GlassCard className="p-6">
             <h3 className="font-display text-lg font-bold text-app-text">Personagens Principais</h3>
             <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {[
-                { name: "Adão e Eva", role: "Primeiros pais" },
-                { name: "Noé", role: "O construtor da arca" },
-                { name: "Abraão", role: "Pai da fé" },
-                { name: "José", role: "Governador do Egito" },
-              ].map((char) => (
-                <div key={char.name} className="rounded-xl bg-app-surface/50 p-3 border border-app-border/40 text-center">
-                  <div className="font-display text-xs font-bold text-app-text">{char.name}</div>
-                  <div className="mt-1 text-[10px] text-app-text-muted">{char.role}</div>
-                </div>
+              {CHARACTERS.map((char) => (
+                <button
+                  key={char.name}
+                  onClick={() => setSelectedChar(char)}
+                  className="group flex flex-col overflow-hidden rounded-xl bg-app-surface/50 border border-app-border/40 text-center transition-all duration-200 hover:border-brand-primary/40 hover:bg-app-surface-elevated/80 hover:-translate-y-0.5"
+                >
+                  <div className="relative aspect-square w-full overflow-hidden">
+                    <img
+                      src={char.image}
+                      alt={char.name}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  </div>
+                  <div className="p-2.5">
+                    <div className="font-display text-xs font-bold text-app-text group-hover:text-brand-primary transition-colors">
+                      {char.name}
+                    </div>
+                    <div className="mt-0.5 text-[10px] text-app-text-muted">{char.role}</div>
+                  </div>
+                </button>
               ))}
             </div>
           </GlassCard>
@@ -91,13 +145,52 @@ export function GenesisContext() {
             </div>
             <p className="text-xs text-app-text-muted max-w-xs">
               Visualize a ordem cronológica dos patriarcas e os grandes marcos da história da salvação.
-              </p>
+            </p>
             <BdsButton size="sm" variant="secondary" className="w-fit">
               Ver Linha do Tempo
             </BdsButton>
           </UniversalCard>
         </div>
       </div>
+
+      {/* Character Biography Modal */}
+      <Dialog open={!!selectedChar} onOpenChange={(open) => !open && setSelectedChar(null)}>
+        <DialogContent className="border-app-border bg-app-surface-elevated text-app-text max-w-md">
+          {selectedChar && (
+            <>
+              <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+                <img
+                  src={selectedChar.image}
+                  alt={selectedChar.name}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-app-surface-elevated via-transparent to-transparent" />
+              </div>
+              <DialogHeader>
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-primary">
+                  <User className="h-3.5 w-3.5" /> Personagem Bíblico
+                </div>
+                <DialogTitle className="font-display text-2xl mt-1">{selectedChar.name}</DialogTitle>
+                <DialogDescription className="text-brand-gold font-medium text-xs">
+                  {selectedChar.role}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 text-sm leading-relaxed text-app-text-muted">
+                <p>{selectedChar.bio}</p>
+                <div className="flex items-center gap-2 rounded-xl bg-app-surface/60 p-3 border border-app-border/40 text-xs">
+                  <BookOpen className="h-4 w-4 text-brand-cyan shrink-0" />
+                  <span>Aparece principalmente em: <strong className="text-app-text">{selectedChar.chapters}</strong></span>
+                </div>
+              </div>
+              <div className="mt-4 flex justify-end">
+                <BdsButton onClick={() => setSelectedChar(null)} className="w-full sm:w-auto">
+                  Ver histórias
+                </BdsButton>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </Section>
   );
 }
