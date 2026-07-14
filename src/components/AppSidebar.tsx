@@ -1,4 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
+
 import {
   Home,
   Library,
