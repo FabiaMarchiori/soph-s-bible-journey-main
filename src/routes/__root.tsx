@@ -79,19 +79,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#080B18" },
-      { title: "Jornada Bíblica com Soph — Histórias para aprender, viver e compartilhar" },
+      { title: "Início — Jornada Bíblica com Soph" },
       {
         name: "description",
         content:
-          "Plataforma cristã interativa com histórias bíblicas em quatro trilhas visuais: Infantil, Teen, Mangá e Tradicional.",
+          "Descubra histórias bíblicas em quatro trilhas visuais: Infantil, Teen, Mangá e Tradicional. Comece por Gênesis.",
       },
-      { property: "og:title", content: "Jornada Bíblica com Soph" },
+      { property: "og:title", content: "Início — Jornada Bíblica com Soph" },
       {
         property: "og:description",
-        content: "A Bíblia como você nunca viveu — histórias visuais em quatro trilhas.",
+        content: "Descubra histórias bíblicas em quatro trilhas visuais: Infantil, Teen, Mangá e Tradicional. Comece por Gênesis.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Início — Jornada Bíblica com Soph" },
+      { name: "twitter:description", content: "Descubra histórias bíblicas em quatro trilhas visuais: Infantil, Teen, Mangá e Tradicional. Comece por Gênesis." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0fe503a-5dee-48af-b6a7-b41a4adb2149/id-preview-b37685c7--5983aff9-5ecb-4ed7-9d86-8ab0111aa983.lovable.app-1784050435454.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b0fe503a-5dee-48af-b6a7-b41a4adb2149/id-preview-b37685c7--5983aff9-5ecb-4ed7-9d86-8ab0111aa983.lovable.app-1784050435454.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

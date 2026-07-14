@@ -35,10 +35,10 @@ export const Route = createFileRoute("/")({
         content:
           "Descubra histórias bíblicas em quatro trilhas visuais: Infantil, Teen, Mangá e Tradicional. Comece por Gênesis.",
       },
-      { property: "og:title", content: "A Bíblia como você nunca viveu" },
+      { property: "og:title", content: "Início — Jornada Bíblica com Soph" },
       {
         property: "og:description",
-        content: "Continue sua jornada, explore trilhas e viva histórias bíblicas com Soph.",
+        content: "Descubra histórias bíblicas em quatro trilhas visuais: Infantil, Teen, Mangá e Tradicional. Comece por Gênesis.",
       },
     ],
   }),
