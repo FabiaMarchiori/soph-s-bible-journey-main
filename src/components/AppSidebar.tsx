@@ -137,7 +137,7 @@ export function AppSidebar({ collapsed, onToggle, onNavigate }: SidebarProps) {
         </div>
 
         {/* Nav */}
-        <nav className="no-scrollbar flex-1 overflow-y-auto px-3 py-4">
+        <nav ref={navRef} className="soph-scroll flex-1 overflow-y-auto px-3 py-4">
           {groups.map((group) => {
             const visibleItems = group.items.filter((i) => !i.hidden);
             if (visibleItems.length === 0) return null;
