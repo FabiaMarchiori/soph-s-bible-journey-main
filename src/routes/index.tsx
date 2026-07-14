@@ -478,7 +478,7 @@ function FeaturedStoriesSection() {
           <div key={idx} data-featured className="w-full">
             <article className="group relative flex h-[320px] flex-col overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-card transition-all duration-300 ease-smooth hover:-translate-y-1.5 hover:shadow-hover">
               {/* Mini Poster Image Background */}
-              <div className="absolute inset-0">
+              <div className="cinematic-frame absolute inset-0 overflow-hidden">
                 <img
                   src={s.image}
                   alt={s.title}
