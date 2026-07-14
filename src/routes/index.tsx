@@ -263,7 +263,7 @@ function ContinueJourney() {
       <SectionHeader id="continuar-titulo" eyebrow="Continuar" title="Retome de onde parou" />
       <article className="relative overflow-hidden rounded-3xl border border-app-border bg-app-surface-elevated shadow-panel transition-all duration-300 hover:shadow-hover">
         <div className="grid gap-0 md:grid-cols-[280px_1fr]">
-          <div className="relative aspect-video md:aspect-auto">
+          <div className="cinematic-frame relative aspect-video overflow-hidden md:aspect-auto">
             <img src={story.image} alt={story.title} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-r from-app-surface-elevated via-transparent to-transparent md:from-transparent md:via-transparent md:to-app-surface-elevated" />
           </div>
