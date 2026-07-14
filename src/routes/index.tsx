@@ -352,7 +352,7 @@ function DescubraHoje() {
             <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-black/30 z-10 border-r border-white/5" />
 
             {/* Image Cover */}
-            <div className="relative h-[60%] w-full overflow-hidden">
+            <div className="cinematic-frame relative h-[60%] w-full overflow-hidden">
               <img
                 src={item.image}
                 alt={item.title}
