@@ -23,6 +23,7 @@ import { Route as AtividadesRouteImport } from './routes/atividades'
 import { Route as AntigoTestamentoRouteImport } from './routes/antigo-testamento'
 import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BibliotecaSlugRouteImport } from './routes/biblioteca.$slug'
 
 const TrilhasRoute = TrilhasRouteImport.update({
   id: '/trilhas',
@@ -94,13 +95,18 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliotecaSlugRoute = BibliotecaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BibliotecaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ajuda': typeof AjudaRoute
   '/antigo-testamento': typeof AntigoTestamentoRoute
   '/atividades': typeof AtividadesRoute
-  '/biblioteca': typeof BibliotecaRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
   '/configuracoes': typeof ConfiguracoesRoute
   '/design-system': typeof DesignSystemRoute
   '/favoritos': typeof FavoritosRoute
@@ -110,13 +116,14 @@ export interface FileRoutesByFullPath {
   '/perfil': typeof PerfilRoute
   '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ajuda': typeof AjudaRoute
   '/antigo-testamento': typeof AntigoTestamentoRoute
   '/atividades': typeof AtividadesRoute
-  '/biblioteca': typeof BibliotecaRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
   '/configuracoes': typeof ConfiguracoesRoute
   '/design-system': typeof DesignSystemRoute
   '/favoritos': typeof FavoritosRoute
@@ -126,6 +133,7 @@ export interface FileRoutesByTo {
   '/perfil': typeof PerfilRoute
   '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -133,7 +141,7 @@ export interface FileRoutesById {
   '/ajuda': typeof AjudaRoute
   '/antigo-testamento': typeof AntigoTestamentoRoute
   '/atividades': typeof AtividadesRoute
-  '/biblioteca': typeof BibliotecaRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
   '/configuracoes': typeof ConfiguracoesRoute
   '/design-system': typeof DesignSystemRoute
   '/favoritos': typeof FavoritosRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/perfil': typeof PerfilRoute
   '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -161,6 +170,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/quizzes'
     | '/trilhas'
+    | '/biblioteca/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -177,6 +187,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/quizzes'
     | '/trilhas'
+    | '/biblioteca/$slug'
   id:
     | '__root__'
     | '/'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/perfil'
     | '/quizzes'
     | '/trilhas'
+    | '/biblioteca/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -200,7 +212,7 @@ export interface RootRouteChildren {
   AjudaRoute: typeof AjudaRoute
   AntigoTestamentoRoute: typeof AntigoTestamentoRoute
   AtividadesRoute: typeof AtividadesRoute
-  BibliotecaRoute: typeof BibliotecaRoute
+  BibliotecaRoute: typeof BibliotecaRouteWithChildren
   ConfiguracoesRoute: typeof ConfiguracoesRoute
   DesignSystemRoute: typeof DesignSystemRoute
   FavoritosRoute: typeof FavoritosRoute
@@ -312,15 +324,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblioteca/$slug': {
+      id: '/biblioteca/$slug'
+      path: '/$slug'
+      fullPath: '/biblioteca/$slug'
+      preLoaderRoute: typeof BibliotecaSlugRouteImport
+      parentRoute: typeof BibliotecaRoute
+    }
   }
 }
+
+interface BibliotecaRouteChildren {
+  BibliotecaSlugRoute: typeof BibliotecaSlugRoute
+}
+
+const BibliotecaRouteChildren: BibliotecaRouteChildren = {
+  BibliotecaSlugRoute: BibliotecaSlugRoute,
+}
+
+const BibliotecaRouteWithChildren = BibliotecaRoute._addFileChildren(
+  BibliotecaRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AjudaRoute: AjudaRoute,
   AntigoTestamentoRoute: AntigoTestamentoRoute,
   AtividadesRoute: AtividadesRoute,
-  BibliotecaRoute: BibliotecaRoute,
+  BibliotecaRoute: BibliotecaRouteWithChildren,
   ConfiguracoesRoute: ConfiguracoesRoute,
   DesignSystemRoute: DesignSystemRoute,
   FavoritosRoute: FavoritosRoute,
