@@ -1,5 +1,5 @@
 import { Play, Heart, Share2, Sparkles, BookOpen, Compass, Clock } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { BdsButton } from "@/components/bds";
 import { cn } from "@/lib/utils";
 
