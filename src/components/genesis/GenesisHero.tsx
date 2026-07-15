@@ -1,5 +1,5 @@
 import { Play, Heart, Share2, Sparkles, BookOpen, Compass, Clock } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { BdsButton } from "@/components/bds";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,7 @@ export function GenesisHero({
   onFavorite,
   onShare,
 }: GenesisHeroProps) {
+  const navigate = useNavigate();
   return (
     <section className="relative mx-auto mt-6 max-w-[1400px] px-4 md:px-8" aria-label="Apresentação do Livro">
       <div className="relative overflow-hidden rounded-[32px] border border-app-border bg-app-surface-elevated/40 p-6 md:p-12 backdrop-blur-xl">
@@ -84,11 +85,13 @@ export function GenesisHero({
 
             {/* Actions */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link to="/biblioteca/genesis/jornada-1">
-                <BdsButton size="lg" leadingIcon={<Play className="h-5 w-5 fill-current" />}>
-                  Começar Jornada
-                </BdsButton>
-              </Link>
+              <BdsButton
+                size="lg"
+                leadingIcon={<Play className="h-5 w-5 fill-current" />}
+                onClick={() => navigate({ to: "/biblioteca/genesis/jornada-1" })}
+              >
+                Começar Jornada
+              </BdsButton>
               <BdsButton
                 variant="secondary"
                 size="lg"
