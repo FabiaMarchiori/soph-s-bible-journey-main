@@ -84,11 +84,11 @@ export function GenesisHero({
 
             {/* Actions */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <BdsButton size="lg" leadingIcon={<Play className="h-5 w-5 fill-current" />} asChild>
-                <Link to="/biblioteca/genesis/jornada-1">
+              <Link to="/biblioteca/genesis/jornada-1">
+                <BdsButton size="lg" leadingIcon={<Play className="h-5 w-5 fill-current" />}>
                   Começar Jornada
-                </Link>
-              </BdsButton>
+                </BdsButton>
+              </Link>
               <BdsButton
                 variant="secondary"
                 size="lg"

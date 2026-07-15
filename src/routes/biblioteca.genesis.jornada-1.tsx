@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   Play,
   Heart,
@@ -16,6 +17,7 @@ import {
   Info,
   CheckCircle2,
   Lock,
+  User,
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import {
