@@ -19,6 +19,7 @@ export function GenesisHero({
   onShare,
 }: GenesisHeroProps) {
   const navigate = useNavigate();
+  return (
     <section className="relative mx-auto mt-6 max-w-[1400px] px-4 md:px-8" aria-label="Apresentação do Livro">
       <div className="relative overflow-hidden rounded-[32px] border border-app-border bg-app-surface-elevated/40 p-6 md:p-12 backdrop-blur-xl">
         <div className="absolute inset-0 -z-10">
