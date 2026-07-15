@@ -85,11 +85,13 @@ export function GenesisHero({
 
             {/* Actions */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link to="/biblioteca/genesis/jornada-1">
-                <BdsButton size="lg" leadingIcon={<Play className="h-5 w-5 fill-current" />}>
-                  Começar Jornada
-                </BdsButton>
-              </Link>
+              <BdsButton
+                size="lg"
+                leadingIcon={<Play className="h-5 w-5 fill-current" />}
+                onClick={() => navigate({ to: "/biblioteca/genesis/jornada-1" })}
+              >
+                Começar Jornada
+              </BdsButton>
               <BdsButton
                 variant="secondary"
                 size="lg"
