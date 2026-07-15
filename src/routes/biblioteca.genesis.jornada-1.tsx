@@ -17,6 +17,7 @@ import {
   Info,
   CheckCircle2,
   Lock,
+  User,
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import {
