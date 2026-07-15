@@ -24,6 +24,8 @@ import { Route as AntigoTestamentoRouteImport } from './routes/antigo-testamento
 import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BibliotecaSlugRouteImport } from './routes/biblioteca.$slug'
+import { Route as BibliotecaGenesisJornada1RouteImport } from './routes/biblioteca.genesis.jornada-1'
+import { Route as BibliotecaGenesisJornada1StorySlugRouteImport } from './routes/biblioteca.genesis.jornada-1.$storySlug'
 
 const TrilhasRoute = TrilhasRouteImport.update({
   id: '/trilhas',
@@ -100,6 +102,18 @@ const BibliotecaSlugRoute = BibliotecaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BibliotecaRoute,
 } as any)
+const BibliotecaGenesisJornada1Route =
+  BibliotecaGenesisJornada1RouteImport.update({
+    id: '/genesis/jornada-1',
+    path: '/genesis/jornada-1',
+    getParentRoute: () => BibliotecaRoute,
+  } as any)
+const BibliotecaGenesisJornada1StorySlugRoute =
+  BibliotecaGenesisJornada1StorySlugRouteImport.update({
+    id: '/$storySlug',
+    path: '/$storySlug',
+    getParentRoute: () => BibliotecaGenesisJornada1Route,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -117,6 +131,8 @@ export interface FileRoutesByFullPath {
   '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/biblioteca/genesis/jornada-1': typeof BibliotecaGenesisJornada1RouteWithChildren
+  '/biblioteca/genesis/jornada-1/$storySlug': typeof BibliotecaGenesisJornada1StorySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -134,6 +150,8 @@ export interface FileRoutesByTo {
   '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/biblioteca/genesis/jornada-1': typeof BibliotecaGenesisJornada1RouteWithChildren
+  '/biblioteca/genesis/jornada-1/$storySlug': typeof BibliotecaGenesisJornada1StorySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -152,6 +170,8 @@ export interface FileRoutesById {
   '/quizzes': typeof QuizzesRoute
   '/trilhas': typeof TrilhasRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/biblioteca/genesis/jornada-1': typeof BibliotecaGenesisJornada1RouteWithChildren
+  '/biblioteca/genesis/jornada-1/$storySlug': typeof BibliotecaGenesisJornada1StorySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -171,6 +191,8 @@ export interface FileRouteTypes {
     | '/quizzes'
     | '/trilhas'
     | '/biblioteca/$slug'
+    | '/biblioteca/genesis/jornada-1'
+    | '/biblioteca/genesis/jornada-1/$storySlug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -188,6 +210,8 @@ export interface FileRouteTypes {
     | '/quizzes'
     | '/trilhas'
     | '/biblioteca/$slug'
+    | '/biblioteca/genesis/jornada-1'
+    | '/biblioteca/genesis/jornada-1/$storySlug'
   id:
     | '__root__'
     | '/'
@@ -205,6 +229,8 @@ export interface FileRouteTypes {
     | '/quizzes'
     | '/trilhas'
     | '/biblioteca/$slug'
+    | '/biblioteca/genesis/jornada-1'
+    | '/biblioteca/genesis/jornada-1/$storySlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -331,15 +357,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BibliotecaSlugRouteImport
       parentRoute: typeof BibliotecaRoute
     }
+    '/biblioteca/genesis/jornada-1': {
+      id: '/biblioteca/genesis/jornada-1'
+      path: '/genesis/jornada-1'
+      fullPath: '/biblioteca/genesis/jornada-1'
+      preLoaderRoute: typeof BibliotecaGenesisJornada1RouteImport
+      parentRoute: typeof BibliotecaRoute
+    }
+    '/biblioteca/genesis/jornada-1/$storySlug': {
+      id: '/biblioteca/genesis/jornada-1/$storySlug'
+      path: '/$storySlug'
+      fullPath: '/biblioteca/genesis/jornada-1/$storySlug'
+      preLoaderRoute: typeof BibliotecaGenesisJornada1StorySlugRouteImport
+      parentRoute: typeof BibliotecaGenesisJornada1Route
+    }
   }
 }
 
+interface BibliotecaGenesisJornada1RouteChildren {
+  BibliotecaGenesisJornada1StorySlugRoute: typeof BibliotecaGenesisJornada1StorySlugRoute
+}
+
+const BibliotecaGenesisJornada1RouteChildren: BibliotecaGenesisJornada1RouteChildren =
+  {
+    BibliotecaGenesisJornada1StorySlugRoute:
+      BibliotecaGenesisJornada1StorySlugRoute,
+  }
+
+const BibliotecaGenesisJornada1RouteWithChildren =
+  BibliotecaGenesisJornada1Route._addFileChildren(
+    BibliotecaGenesisJornada1RouteChildren,
+  )
+
 interface BibliotecaRouteChildren {
   BibliotecaSlugRoute: typeof BibliotecaSlugRoute
+  BibliotecaGenesisJornada1Route: typeof BibliotecaGenesisJornada1RouteWithChildren
 }
 
 const BibliotecaRouteChildren: BibliotecaRouteChildren = {
   BibliotecaSlugRoute: BibliotecaSlugRoute,
+  BibliotecaGenesisJornada1Route: BibliotecaGenesisJornada1RouteWithChildren,
 }
 
 const BibliotecaRouteWithChildren = BibliotecaRoute._addFileChildren(
@@ -365,3 +422,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
